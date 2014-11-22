@@ -13,15 +13,17 @@ void setup() {
 
 void loop() {
   Process p;
-  p.runShellCommand("/usr/bin/curl http://mathemagie.net/projects/arret_demande/get_data_bus.php");
+  p.runShellCommand("/usr/bin/curl http://mathemagie.net/projects/arret_demande/get_data_bus.php?1");
   Console.println("run curl command");
+  Serial.println("run curl command");
   
   while(p.running());  
 
   // Read command output. runShellCommand() should have passed "Signal: xx&":
   while (p.available()) {
-    int result = p.parseInt();          // look for an integer
-    if (result == 1) {
+    int result = p.parseInt(); 
+     Serial.println("OK");    // look for an integer
+     if (result == 1) {
       Console.println("light on");
       digitalWrite(ledPin, HIGH);
       delay(250);
